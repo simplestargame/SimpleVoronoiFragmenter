@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SimplestarGame/VoronoiFragmenter/Scenes/CubeFragment.unity
+    path: Assets/SimplestarGame/VoronoiFragmenter/Scenes/SampleScene.unity
     guid: e252cb041b4bdb047821c9f4e3dbdbe5
   m_configObjects: {}
