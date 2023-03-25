@@ -52,11 +52,11 @@ namespace SimplestarGame
             var ray = this.mainCamera.ScreenPointToRay(point);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                if (hit.collider.gameObject.TryGetComponent(out VoronoiFragmenter voronoiFragment))
+                switch (this.shootType)
                 {
-                    switch (this.shootType)
-                    {
-                        case SampleShootType.Bullet:
+                    case SampleShootType.Bullet:
+                        {
+                            if (hit.collider.gameObject.TryGetComponent(out VoronoiFragmenter voronoiFragment))
                             {
                                 if (!hit.collider.gameObject.TryGetComponent(out Rigidbody rigidbody))
                                 {
@@ -65,22 +65,25 @@ namespace SimplestarGame
                                 rigidbody.isKinematic = false;
                                 this.onShoot?.Invoke(ray);
                             }
-                            break;
-                        case SampleShootType.Direct:
-                        default:
+                        }
+                        break;
+                    case SampleShootType.Direct:
+                    default:
+                        {
+                            float scale = 3f;
+                            if (hit.collider.gameObject.TryGetComponent(out VoronoiFragmenter voronoiFragment))
                             {
-                                float scale = 3f;
-
                                 scale = 1f;
                                 voronoiFragment.Fragment(hit);
-                                this.PlaySE(hit);
-
-                                StartCoroutine(this.CoExplodeObjects(hit, scale));
                             }
-                            break;
-                    }
+                            this.PlaySE(hit);
+
+                            StartCoroutine(this.CoExplodeObjects(hit, scale));
+                        }
+                        break;
                 }
             }
+
         }
 
         void PlaySE(RaycastHit hit)

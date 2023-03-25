@@ -350,7 +350,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 8}
+  m_SizeDelta: {x: 20, y: 8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &375034665
 MonoBehaviour:
@@ -780,6 +780,14 @@ MonoBehaviour:
     m_RotationOrder: 4
   shootPower: 12
   sliderShootPower: {fileID: 2040509634}
+  audioClips:
+  - {fileID: 8300000, guid: 602485f8e88986a448a27bf926d94b47, type: 3}
+  - {fileID: 8300000, guid: 2c600ccf26290bd42a918fcbc8bf0003, type: 3}
+  audioSources:
+  - {fileID: 1518338249}
+  - {fileID: 806512441}
+  - {fileID: 1568562502}
+  - {fileID: 1744392730}
 --- !u!1 &806512440
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,8 +2022,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 100, y: 20}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 200, y: 40}
+  m_SizeDelta: {x: 320, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2040509634
 MonoBehaviour:

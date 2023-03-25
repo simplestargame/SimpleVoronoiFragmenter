@@ -20,7 +20,6 @@ namespace SimplestarGame
                     if (0 == colliders.Length)
                     {
                         var monkey = Instantiate(this.monkeyPrefab, genPoint.position, genPoint.rotation, null);
-                        monkey.transform.localScale *= Random.Range(1, 3);
                     }
                 }
             }
