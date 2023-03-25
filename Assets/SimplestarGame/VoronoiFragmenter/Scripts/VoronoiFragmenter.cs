@@ -531,7 +531,12 @@ namespace SimplestarGame
                 {
                     renderer.enabled = false;
                 }
+                List<Transform> childs = new List<Transform>();
                 foreach (Transform childTransform in this.transform)
+                {
+                    childs.Add(childTransform);
+                }
+                foreach (Transform childTransform in childs)
                 {
                     // 子オブジェクトを開放
                     if (!childTransform.TryGetComponent(out Rigidbody rigidbody))
