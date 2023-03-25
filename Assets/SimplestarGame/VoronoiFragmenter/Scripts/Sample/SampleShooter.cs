@@ -11,11 +11,17 @@ namespace SimplestarGame
         [SerializeField] AudioSource[] audioSources;
         [SerializeField] Camera mainCamera;
         [SerializeField] TouchInput touchInput;
+        [SerializeField] SampleShootType shootType;
+
+        internal System.Action<Ray> onShoot;
 
         void Start()
         {
-            this.touchInput.onLeftTap += this.OnLeftTap;
-            this.touchInput.onRightTap += this.OnRightTap;
+            if (null != this.touchInput)
+            {
+                this.touchInput.onLeftTap += this.OnLeftTap;
+                this.touchInput.onRightTap += this.OnRightTap;
+            }
         }
 
         void OnLeftTap(Vector2 point)
@@ -46,14 +52,34 @@ namespace SimplestarGame
             var ray = this.mainCamera.ScreenPointToRay(point);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                float scale = 3f;
                 if (hit.collider.gameObject.TryGetComponent(out VoronoiFragmenter voronoiFragment))
                 {
-                    scale = 1f;
-                    voronoiFragment.Fragment(hit);
-                    this.PlaySE(hit);
+                    switch (this.shootType)
+                    {
+                        case SampleShootType.Bullet:
+                            {
+                                if (!hit.collider.gameObject.TryGetComponent(out Rigidbody rigidbody))
+                                {
+                                    rigidbody = hit.collider.gameObject.AddComponent<Rigidbody>();
+                                }
+                                rigidbody.isKinematic = false;
+                                this.onShoot?.Invoke(ray);
+                            }
+                            break;
+                        case SampleShootType.Direct:
+                        default:
+                            {
+                                float scale = 3f;
+
+                                scale = 1f;
+                                voronoiFragment.Fragment(hit);
+                                this.PlaySE(hit);
+
+                                StartCoroutine(this.CoExplodeObjects(hit, scale));
+                            }
+                            break;
+                    }
                 }
-                StartCoroutine(this.CoExplodeObjects(hit, scale));
             }
         }
 
@@ -88,6 +114,14 @@ namespace SimplestarGame
             }
         }
 
+
         int nextAudioSourceIndex = 0;
+    }
+
+    public enum SampleShootType
+    {
+        Direct = 0,
+        Bullet,
+        Max
     }
 }

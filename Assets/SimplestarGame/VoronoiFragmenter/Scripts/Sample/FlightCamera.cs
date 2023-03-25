@@ -11,8 +11,11 @@ namespace SimplestarGame
         void Start()
         {
             this.rotation = this.transform.localRotation.eulerAngles;
-            this.touchInput.onLeftAxis += this.OnLeftAxis;
-            this.touchInput.onRightAxis += this.OnRightAxis;
+            if (null != this.touchInput)
+            {
+                this.touchInput.onLeftAxis += this.OnLeftAxis;
+                this.touchInput.onRightAxis += this.OnRightAxis;
+            }
         }
 
         void OnLeftAxis(Vector2 axis)

@@ -17,8 +17,11 @@ namespace SimplestarGame
             }
             Cursor.visible = false;
             this.cursorTransform = this.cursorImage.GetComponent<RectTransform>();
-            this.touchInput.onLeftTap += this.OnLeftTap;
-            this.touchInput.onRightTap += this.OnRightTap;
+            if (null != this.touchInput)
+            {
+                this.touchInput.onLeftTap += this.OnLeftTap;
+                this.touchInput.onRightTap += this.OnRightTap;
+            }
         }
 
         void OnLeftTap(Vector2 point)

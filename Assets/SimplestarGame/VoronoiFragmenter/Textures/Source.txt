@@ -7,8 +7,10 @@ borrowed it from
 https://cc0textures.com/view?id=Ice004
 
 pillar.png
+pillarSprite.png
 reticle.png
 reticle4.png
+Monkey.png
 提供 by
 シンプルスター@Unityゲーム制作
 @lpcwstr
